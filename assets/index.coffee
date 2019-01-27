@@ -4,6 +4,14 @@
 ###
 'use strict'
 
+#=include _utils.coffee
+#=include _default-settings.coffee
+
+CONTEXT_PROTO = _create null
+#=include _send.coffee
+#=include _otherMethods.coffee
+
+
 class Cookie
 	constructor: (@app)->
 		@enabled = on # the plugin is enabled
@@ -11,6 +19,16 @@ class Cookie
 	 * Reload parser
 	###
 	reload: (settings)->
+		# copy default settings
+		options = SETTINGS.slice 0
+		# prepare options, we use array for best performance
+		if settings
+			for k,v of settings
+				defSet = SETTINGS_INIT[k]
+				if defSet
+					options[defSet.i]= defSet.check v # check the value is correct
+				else unless k is 'require'
+					throw new Error "Unknown option: #{k}"
 		# enable
 		@enable()
 		return
@@ -18,12 +36,25 @@ class Cookie
 	 * destroy
 	###
 	destroy: ->
+		# remove all properties
+		ctxProto = @app.Context
+		for k,v of ctxProto
+			if v is CONTEXT_PROTO[k]
+				delete ctxProto[k]
 		return
 	###*
 	 * Disable, enable
 	###
-	disable: -> @destroy
+	disable: -> @destroy()
 	enable: ->
+		# get the descriptor
+		ctxDescriptor= Object.getOwnPropertyDescriptors CONTEXT_PROTO
+		for k,v of ctxDescriptor
+			v.writable = off
+			v.enumerable = off
+		# add to context
+		_defineProperties @app.Context, ctxDescriptor
 		return
+
 
 module.exports = Cookie
