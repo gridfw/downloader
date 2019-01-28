@@ -16,7 +16,7 @@ Add this as plugin inside your config file (or any other configuration method)
 }
 ```
 
-### Options:
+## Options:
 We recommand keeping default values for all options (just do not set any option). Keeping "Convention over configuration" will make your life easier ;)
 
 ### Pretty
@@ -91,8 +91,6 @@ app.get '/', (ctx)->
 	# We highly recommande to keep default messages.
 ```
 
-### ctx.pretty = true or false
-Show sent data in pretty format for the current request. (not sure why you will need this :) )
 
 ## Context methods
 Those methods will be added to the context:
@@ -128,18 +126,8 @@ The name of the callback will be extracted from request query (see configuration
 
 ### <Promise> ctx.sendFile(filePath, options)
 Send a file to the user. By default it will be send as "inline" file (used to load data by the browser instead of executing download)
-Those are possible options:
 
------------------------------------------------------------------------------
-| Option		| Type		| Default value	| Description					|
------------------------------------------------------------------------------
-| inline		| Boolean	| true			| Inline or attachement			|
-| name			| String	| null			| Override file name			|
-| lastModified	| Number	| last modified	| file last modified in ms		|
-| etag			| Boolean or function | true| Etag http header generating	|
-| age			| String	| null			| Set cache max edge			|
-| acceptRanges	| Boolean	| true			| Accept ranged requests (enable download resume, seek inside videos, ...)		|
------------------------------------------------------------------------------
+This method uses [npm send](https://www.npmjs.com/package/send). (click on it to see available options)
 
 ### <Promise> ctx.download(data, options)
 Send a file to the user as attachement (use download manager if found)

@@ -3,6 +3,9 @@
  * @copyright khalid RAFIK 2019
 ###
 'use strict'
+SendFile	= require 'send'
+ETag		= require 'etag'
+ContentDisposition = require 'content-disposition'
 
 #=include _utils.coffee
 #=include _default-settings.coffee
@@ -10,9 +13,11 @@
 CONTEXT_PROTO = _create null
 #=include _send.coffee
 #=include _otherMethods.coffee
+#=include _send-file.coffee
+#=include _attributes.coffee
 
 
-class Cookie
+class Downloader
 	constructor: (@app)->
 		@enabled = on # the plugin is enabled
 	###*
@@ -57,4 +62,4 @@ class Cookie
 		return
 
 
-module.exports = Cookie
+module.exports = Downloader

@@ -11,13 +11,14 @@ _initSettings = <%= initSettings %>
 			throw new Error "Options.jsonp expected function" unless typeof value is 'function'
 			value
 	etag:
-		default: (data, encoding)->
+		default: ETag
 		check: (value) ->
 			if value is false
-				return ->
+				return -> undefined
 			else if value is true
-				return @default
+				return ETag
 			else if typeof value is 'function'
 				return value
 			else
-				throw new Error 'Options.etag expected boolean or sync function'
+				throw 'Expected boolean or sync function'
+	
