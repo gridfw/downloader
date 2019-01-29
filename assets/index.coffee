@@ -6,6 +6,9 @@
 SendFile	= require 'send'
 ETag		= require 'etag'
 ContentDisposition = require 'content-disposition'
+MimeType	= require 'mime-types'
+OnFinishLib	= require 'on-finished'
+Buffer		= require('safe-buffer').Buffer
 
 #=include _utils.coffee
 #=include _default-settings.coffee
@@ -24,41 +27,25 @@ class Downloader
 	 * Reload parser
 	###
 	reload: (settings)->
-		# copy default settings
-		options = SETTINGS.slice 0
-		# prepare options, we use array for best performance
-		if settings
-			for k,v of settings
-				defSet = SETTINGS_INIT[k]
-				if defSet
-					options[defSet.i]= defSet.check v # check the value is correct
-				else unless k is 'require'
-					throw new Error "Unknown option: #{k}"
+		# load settings
+		_initSettings @app, settings
 		# enable
 		@enable()
 		return
 	###*
 	 * destroy
 	###
-	destroy: ->
-		# remove all properties
-		ctxProto = @app.Context
-		for k,v of ctxProto
-			if v is CONTEXT_PROTO[k]
-				delete ctxProto[k]
-		return
+	destroy: -> @disable()
 	###*
 	 * Disable, enable
 	###
-	disable: -> @destroy()
+	disable: ->
+		@app.removeProperties
+			Context: CONTEXT_PROTO
+		return
 	enable: ->
-		# get the descriptor
-		ctxDescriptor= Object.getOwnPropertyDescriptors CONTEXT_PROTO
-		for k,v of ctxDescriptor
-			v.writable = off
-			v.enumerable = off
-		# add to context
-		_defineProperties @app.Context, ctxDescriptor
+		@app.addProperties
+			Context: CONTEXT_PROTO
 		return
 
 

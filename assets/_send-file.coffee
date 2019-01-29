@@ -42,7 +42,7 @@ CONTEXT_PROTO.sendFile= (path, options)->
 			streaming = off
 		# 	resolve event
 		# Execute a callback when a HTTP request closes, finishes, or errors.
-		onFinishLib this, (err)->
+		OnFinishLib this, (err)->
 			# err.code = 'ECONNRESET'
 			reject err if err
 			setImmediate ->

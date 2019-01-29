@@ -31,5 +31,13 @@
   "bugs": {
     "url": "https://github.com/gridfw/downloader/issues"
   },
-  "homepage": "https://github.com/gridfw/downloader#readme"
+  "homepage": "https://github.com/gridfw/downloader#readme",
+  "dependencies": {
+    "content-disposition": "^0.5.3",
+    "etag": "^1.8.1",
+    "mime-types": "^2.1.21",
+    "on-finished": "^2.3.0",
+    "safe-buffer": "^5.1.2",
+    "send": "^0.16.2"
+  }
 }

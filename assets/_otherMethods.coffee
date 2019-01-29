@@ -22,7 +22,7 @@ CONTEXT_PROTO.status= (statusCode, statusMessage)->
 ###
 CONTEXT_PROTO.json= (data)->
 	# stringify data
-	if @app.s[<%= settings.pretty %>]
+	if @s[<%= settings.pretty %>]
 		data = JSON.stringify data, null, "\t"
 	else
 		data = JSON.stringify data
@@ -34,14 +34,14 @@ CONTEXT_PROTO.json= (data)->
  * Send JSON
 ###
 CONTEXT_PROTO.jsonp= (data)->
-	settings = @app.s
+	settings = @s
 	# stringify data
 	if settings[<%= settings.pretty %>]
 		data = JSON.stringify data, null, "\t"
 	else
 		data = JSON.stringify data
 	# add cb name
-	data = "#{settings[<%= settings.json %>](this)}(#{data});"
+	data = "#{settings[<%= settings.jsonp %>](this)}(#{data});"
 	# send data
 	@contentType ?= 'application/javascript'
 	@send data

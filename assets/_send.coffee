@@ -49,7 +49,7 @@ CONTEXT_PROTO.send= (data)->
 			if typeof contentType is 'string'
 				# fix content type
 				if contentType.indexOf('/') is -1
-					contentType = mimeType.lookup contentType
+					contentType = MimeType.lookup contentType
 					contentType = 'application/octet-stream' unless contentType
 				# add encoding
 				contentType = contentType.concat '; charset=', encoding
