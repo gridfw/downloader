@@ -132,3 +132,7 @@ This method uses [npm send](https://www.npmjs.com/package/send). (click on it to
 ### <Promise> ctx.download(data, options)
 Send a file to the user as attachement (use download manager if found)
 This equivatent to: ctx.sendFile(filePath, {inline: false})
+
+
+# Supporters
+[![coredigix](https://www.coredigix.com/img/logo.png)](https://coredigix.com)
