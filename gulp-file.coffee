@@ -8,9 +8,10 @@ coffeescript	= require 'gulp-coffeescript'
 
 GfwCompiler		= require 'gridfw-compiler'
 
-settings=
-	mode: gutil.env.mode || 'dev'
-	isProd: gutil.env.mode is 'prod'
+isProd= gutil.env.hasOwnProperty('prod')
+settings = 
+	mode: if isProd then 'prod' else 'dev'
+	isProd: isProd
 # compile final values (consts to be remplaced at compile time)
 # handlers
 compileCoffee = ->
