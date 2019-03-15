@@ -14,7 +14,7 @@ CONTEXT_PROTO.sendFile= (path, options)->
 	new Promise (resolve, reject)=>
 		# control
 		throw new Error 'path expected string' unless typeof path is 'string'
-		path = encodeurl path
+		path = EncodeUrl path
 
 		# Prepare file streaming
 		file = SendFile @req, path, options

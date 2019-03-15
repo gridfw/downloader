@@ -9,6 +9,7 @@ ContentDisposition = require 'content-disposition'
 MimeType	= require 'mime-types'
 OnFinishLib	= require 'on-finished'
 Buffer		= require('safe-buffer').Buffer
+EncodeUrl	= require 'encodeurl'
 
 #=include _utils.coffee
 #=include _default-settings.coffee
