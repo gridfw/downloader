@@ -41,11 +41,11 @@ class Downloader
 	 * Disable, enable
 	###
 	disable: ->
-		@app.removeProperties
+		@app.removeProperties 'Downloader',
 			Context: CONTEXT_PROTO
 		return
 	enable: ->
-		@app.addProperties
+		@app.addProperties 'Downloader',
 			Context: CONTEXT_PROTO
 		return
 
