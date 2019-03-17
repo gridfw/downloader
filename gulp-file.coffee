@@ -6,7 +6,7 @@ uglify			= require('gulp-uglify-es').default
 rename			= require "gulp-rename"
 coffeescript	= require 'gulp-coffeescript'
 
-GfwCompiler		= require 'gridfw-compiler'
+GfwCompiler		= require if isProd then 'gridfw-compiler' else '../compiler'
 
 isProd= gutil.env.hasOwnProperty('prod')
 settings = 

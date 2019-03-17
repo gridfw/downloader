@@ -11,6 +11,9 @@ OnFinishLib	= require 'on-finished'
 Buffer		= require('safe-buffer').Buffer
 EncodeUrl	= require 'encodeurl'
 
+# GError
+GError= null
+
 #=include _utils.coffee
 #=include _default-settings.coffee
 
@@ -20,10 +23,11 @@ CONTEXT_PROTO = _create null
 #=include _send-file.coffee
 #=include _attributes.coffee
 
-
 class Downloader
 	constructor: (@app)->
 		@enabled = on # the plugin is enabled
+		GError= @app.Error
+		return
 	###*
 	 * Reload parser
 	###

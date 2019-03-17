@@ -6,12 +6,12 @@ _initSettings = <%= initSettings %>
 			throw new Error "Options.pretty expected boolean" unless typeof value is 'boolean'
 			value
 	jsonp:
-		default: (ctx)-> ctx.query.cb or 'callback'
+		default: -> (ctx)-> ctx.query.cb or 'callback'
 		check: (value) ->
 			throw new Error "Options.jsonp expected function" unless typeof value is 'function'
 			value
 	etag:
-		default: ETag
+		default: -> ETag
 		check: (value) ->
 			if value is false
 				return -> undefined
