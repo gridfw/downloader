@@ -61,3 +61,4 @@ typings/
 .next
 build/*
 gulp-file.tmp.*
+package-lock.json
